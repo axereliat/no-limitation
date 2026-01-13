@@ -1,0 +1,108 @@
+{
+  "header": {
+    "fightClub": "FIGHT CLUB"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "schedule": "Schedule",
+    "contact": "Contact",
+    "martialArts": "Martial Arts"
+  },
+  "hero": {
+    "title": "NO LIMITATION",
+    "subtitle": "Fight Club - Pleven",
+    "quote": "\"Using no way as a way, having No Limitation as limitation.\"",
+    "quoteAuthor": "- Bruce Lee",
+    "cta": "Trial Class"
+  },
+  "home": {
+    "welcome": "Welcome to NL Fight Club",
+    "intro": "A martial arts club inspired by Bruce Lee's philosophy. We train body and mind without limitations.",
+    "disciplines": "Our Disciplines",
+    "whyUs": "Why Choose Us",
+    "whyUsText": "Professional instructors, modern facility, and family atmosphere.",
+    "trialClass": "Book a trial class"
+  },
+  "about": {
+    "title": "About Us",
+    "history": "Club History",
+    "historyText": "The club was founded in 2010 by Genko Simeonov and Pantaley Gergov, who are Senior Instructors in Jeet Kune Do. Initially, the club focused on mixed martial arts under the name MMA Pleven. Gradually, the club expanded its activities to include multiple combat disciplines - MMA, Grappling, San Da, and Brazilian Jiu-Jitsu. This expansion led to renaming the club to No Limitation.",
+    "philosophy": "Philosophy",
+    "philosophyText": "The club's name comes from a Bruce Lee quote: \"Using no way as a way, having No Limitation as limitation\". We believe everyone can reach their potential through hard work and proper guidance, without limitations - both physical and mental.",
+    "instructors": "Instructors",
+    "facilities": "Facilities & Equipment",
+    "lineage": "Jeet Kune Do Lineage",
+    "partnership": "Partnerships",
+    "partnershipText": "The club works in collaboration with Twisted Jiu Jitsu for Brazilian Jiu-Jitsu."
+  },
+  "schedule": {
+    "title": "Training Schedule",
+    "subtitle": "Choose your training time and join us on the mat",
+    "adultClasses": "Adult Classes",
+    "kidsClasses": "Kids Classes",
+    "kidsAges": "Age groups: 5-7 years and 8-13 years",
+    "years": "yrs",
+    "questions": "Have questions?",
+    "contactUs": "Contact us for more information about training and enrollment.",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "contact": {
+    "title": "Contact",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Working Hours",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send",
+      "success": "Message sent successfully!"
+    },
+    "social": "Social Media"
+  },
+  "martialArts": {
+    "jkd": {
+      "name": "Jeet Kune Do",
+      "description": "Jeet Kune Do (\"The Way of the Intercepting Fist\") is a martial art created by Bruce Lee. It's more of a fighting philosophy than a fixed style.",
+      "benefits": "Benefits",
+      "training": "Training Process"
+    },
+    "mma": {
+      "name": "MMA",
+      "description": "Mixed Martial Arts (MMA) combines techniques from various disciplines - boxing, kickboxing, wrestling, Brazilian jiu-jitsu, and more.",
+      "benefits": "Benefits",
+      "training": "Training Process"
+    },
+    "bjj": {
+      "name": "Brazilian Jiu-Jitsu",
+      "description": "Brazilian Jiu-Jitsu is a martial art focused on ground fighting and submission techniques.",
+      "benefits": "Benefits",
+      "training": "Training Process"
+    },
+    "sanda": {
+      "name": "San Da",
+      "description": "San Da (Sanda) is Chinese kickboxing that combines punches, kicks, throws, and clinch fighting.",
+      "benefits": "Benefits",
+      "training": "Training Process"
+    },
+    "eskrima": {
+      "name": "Eskrima",
+      "description": "Eskrima (Kali/Arnis) is a Filipino martial art focused on weapon-based fighting - sticks, knives, and improvised weapons.",
+      "benefits": "Benefits",
+      "training": "Training Process"
+    },
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "followUs": "Follow Us"
+  }
+}

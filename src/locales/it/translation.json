@@ -1,0 +1,108 @@
+{
+  "header": {
+    "fightClub": "CLUB DI COMBATTIMENTO"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "schedule": "Orari",
+    "contact": "Contatti",
+    "martialArts": "Arti Marziali"
+  },
+  "hero": {
+    "title": "NO LIMITATION",
+    "subtitle": "Club di Combattimento - Pleven",
+    "quote": "\"Using no way as a way, having No Limitation as limitation.\"",
+    "quoteAuthor": "- Bruce Lee",
+    "cta": "Lezione di Prova"
+  },
+  "home": {
+    "welcome": "Benvenuti al NL Fight Club",
+    "intro": "Un club di arti marziali ispirato alla filosofia di Bruce Lee. Alleniamo corpo e mente senza limitazioni.",
+    "disciplines": "Le Nostre Discipline",
+    "whyUs": "Perché Sceglierci",
+    "whyUsText": "Istruttori professionisti, struttura moderna e atmosfera familiare.",
+    "trialClass": "Prenota una lezione di prova"
+  },
+  "about": {
+    "title": "Chi Siamo",
+    "history": "Storia del Club",
+    "historyText": "Il club è stato fondato nel 2010 da Genko Simeonov e Pantaley Gergov, istruttori senior di Jeet Kune Do. Inizialmente, il club si concentrava sulle arti marziali miste con il nome MMA Pleven. Gradualmente, il club ha ampliato le sue attività includendo molteplici discipline di combattimento - MMA, Grappling, San Da e Jiu-Jitsu Brasiliano. Questa espansione ha portato a rinominare il club in No Limitation.",
+    "philosophy": "Filosofia",
+    "philosophyText": "Il nome del club deriva da una citazione di Bruce Lee: \"Using no way as a way, having No Limitation as limitation\". Crediamo che ognuno possa raggiungere il proprio potenziale attraverso il duro lavoro e la giusta guida, senza limitazioni - sia fisiche che mentali.",
+    "instructors": "Istruttori",
+    "facilities": "Strutture e Attrezzature",
+    "lineage": "Lignaggio del Jeet Kune Do",
+    "partnership": "Partnership",
+    "partnershipText": "Il club collabora con Twisted Jiu Jitsu per il Jiu-Jitsu Brasiliano."
+  },
+  "schedule": {
+    "title": "Orario degli Allenamenti",
+    "subtitle": "Scegli il tuo orario di allenamento e unisciti a noi",
+    "adultClasses": "Corsi Adulti",
+    "kidsClasses": "Corsi Bambini",
+    "kidsAges": "Fasce d'età: 5-7 anni e 8-13 anni",
+    "years": "anni",
+    "questions": "Hai domande?",
+    "contactUs": "Contattaci per maggiori informazioni sugli allenamenti e le iscrizioni.",
+    "monday": "Lunedì",
+    "tuesday": "Martedì",
+    "wednesday": "Mercoledì",
+    "thursday": "Giovedì",
+    "friday": "Venerdì",
+    "saturday": "Sabato",
+    "sunday": "Domenica"
+  },
+  "contact": {
+    "title": "Contatti",
+    "address": "Indirizzo",
+    "phone": "Telefono",
+    "email": "Email",
+    "hours": "Orari di Apertura",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Messaggio",
+      "send": "Invia",
+      "success": "Messaggio inviato con successo!"
+    },
+    "social": "Social Media"
+  },
+  "martialArts": {
+    "jkd": {
+      "name": "Jeet Kune Do",
+      "description": "Jeet Kune Do (\"La Via del Pugno che Intercetta\") è un'arte marziale creata da Bruce Lee. È più una filosofia di combattimento che uno stile fisso.",
+      "benefits": "Benefici",
+      "training": "Processo di Allenamento"
+    },
+    "mma": {
+      "name": "MMA",
+      "description": "Le Arti Marziali Miste (MMA) combinano tecniche di varie discipline - boxe, kickboxing, lotta, jiu-jitsu brasiliano e altro.",
+      "benefits": "Benefici",
+      "training": "Processo di Allenamento"
+    },
+    "bjj": {
+      "name": "Jiu-Jitsu Brasiliano",
+      "description": "Il Jiu-Jitsu Brasiliano è un'arte marziale focalizzata sul combattimento a terra e sulle tecniche di sottomissione.",
+      "benefits": "Benefici",
+      "training": "Processo di Allenamento"
+    },
+    "sanda": {
+      "name": "San Da",
+      "description": "San Da (Sanda) è kickboxing cinese che combina pugni, calci, proiezioni e combattimento in clinch.",
+      "benefits": "Benefici",
+      "training": "Processo di Allenamento"
+    },
+    "eskrima": {
+      "name": "Eskrima",
+      "description": "Eskrima (Kali/Arnis) è un'arte marziale filippina focalizzata sul combattimento con armi - bastoni, coltelli e armi improvvisate.",
+      "benefits": "Benefici",
+      "training": "Processo di Allenamento"
+    },
+    "learnMore": "Scopri di Più"
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati",
+    "followUs": "Seguici"
+  }
+}

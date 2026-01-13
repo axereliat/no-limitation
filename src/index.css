@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Dark theme as default - NL Fight Club colors */
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #2d2d2d;
+  --card-foreground: #ffffff;
+  --popover: #2d2d2d;
+  --popover-foreground: #ffffff;
+  --primary: #d4af37;
+  --primary-foreground: #1a1a1a;
+  --secondary: #2d2d2d;
+  --secondary-foreground: #ffffff;
+  --muted: #2d2d2d;
+  --muted-foreground: #b3b3b3;
+  --accent: #d4af37;
+  --accent-foreground: #1a1a1a;
+  --destructive: #ef4444;
+  --border: #3d3d3d;
+  --input: #3d3d3d;
+  --ring: #d4af37;
+  --chart-1: #d4af37;
+  --chart-2: #e5c158;
+  --chart-3: #b3b3b3;
+  --chart-4: #ffffff;
+  --chart-5: #2d2d2d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
