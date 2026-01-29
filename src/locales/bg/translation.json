@@ -12,7 +12,7 @@
   "hero": {
     "title": "NO LIMITATION",
     "subtitle": "Боен клуб - Плевен",
-    "quote": "\"Using no way as a way, having No Limitation as limitation.\"",
+    "quote": "\"Винаги има начин, няма ограничения.\"",
     "quoteAuthor": "- Брус Лий",
     "cta": "Пробен урок"
   },
@@ -64,11 +64,109 @@
       "email": "Имейл",
       "message": "Съобщение",
       "send": "Изпрати",
-      "success": "Съобщението е изпратено успешно!"
+      "sending": "Изпращане...",
+      "success": "Съобщението е изпратено успешно!",
+      "error": "Грешка при изпращане. Моля, опитайте отново."
     },
     "social": "Социални мрежи"
   },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Изход",
+    "profile": "Профил",
+    "email": "Имейл",
+    "password": "Парола",
+    "confirmPassword": "Потвърди парола",
+    "fullName": "Име и фамилия",
+    "fullNamePlaceholder": "Иван Иванов",
+    "loggingIn": "Влизане...",
+    "registering": "Регистрация...",
+    "noAccount": "Нямате акаунт?",
+    "hasAccount": "Вече имате акаунт?",
+    "invalidCredentials": "Невалиден имейл или парола",
+    "allFieldsRequired": "Всички полета са задължителни",
+    "passwordMismatch": "Паролите не съвпадат",
+    "passwordTooShort": "Паролата трябва да е поне 6 символа",
+    "registrationSuccess": "Регистрацията е успешна!",
+    "checkEmail": "Проверете имейла си за потвърждение.",
+    "goToLogin": "Към входа",
+    "profileUpdated": "Профилът е обновен успешно!",
+    "role": "Роля"
+  },
+  "admin": {
+    "dashboard": "Админ панел",
+    "classes": "Тренировки",
+    "submissions": "Съобщения",
+    "instructors": "Инструктори",
+    "newSubmissions": "Нови съобщения",
+    "totalClasses": "Общо тренировки",
+    "totalInstructors": "Общо инструктори",
+    "quickLinks": "Бързи връзки",
+    "viewSubmissions": "Преглед на съобщения",
+    "viewMartialArts": "Преглед на Бойни Изкуства",
+    "manageClasses": "Управление на тренировки",
+    "manageInstructors": "Управление на инструктори",
+    "manageMartialArts": "Управление на бойни изкуства",
+    "viewSite": "Преглед на сайта",
+    "addClass": "Добави тренировка",
+    "addMartialArt": "Добави бойно изкуство",
+    "martialArts": "Бойни изкуства",
+    "martialArtTitle": "Заглавие",
+    "martialArtSubTitle": "Подзаглавие",
+    "subTitlePlaceholder": "Пътят на прихващащия юмрук",
+    "description": "Описание",
+    "descriptionPlaceholder": "Въведете описание...",
+    "noMartialArts": "Все още няма добавени бойни изкуства",
+    "addInstructor": "Добави инструктор",
+    "discipline": "Дисциплина",
+    "dayOfWeek": "Ден от седмицата",
+    "time": "Час",
+    "ageGroup": "Възрастова група",
+    "startTime": "Начален час",
+    "endTime": "Краен час",
+    "actions": "Действия",
+    "instructorName": "Име на инструктор",
+    "instructorTitle": "Титла",
+    "titlePlaceholder": "Старши инструктор",
+    "disciplines": "Дисциплини",
+    "displayOrder": "Ред на показване",
+    "bio": "Биография",
+    "confirmDelete": "Сигурни ли сте, че искате да изтриете?",
+    "noSubmissions": "Няма съобщения",
+    "markRead": "Маркирай като прочетено",
+    "markReplied": "Маркирай като отговорено",
+    "filter": {
+      "all": "Всички",
+      "new": "Нови",
+      "read": "Прочетени",
+      "replied": "Отговорени"
+    },
+    "status": {
+      "new": "Ново",
+      "read": "Прочетено",
+      "replied": "Отговорено"
+    }
+  },
+  "common": {
+    "notFound": "Не е намерено",
+    "save": "Запази",
+    "saving": "Запазване...",
+    "cancel": "Отказ",
+    "delete": "Изтрий",
+    "edit": "Редактирай",
+    "add": "Добави",
+    "clickToUpload": "Кликни за качване",
+    "uploading": "Качване...",
+    "uploadError": "Грешка при качване",
+    "savedChanges": "Промените са запазени."
+  },
   "martialArts": {
+    "benefits": "Предимства",
+    "training": "Тренировъчен процес",
+    "readyToStart": "Готови ли сте да започнете своето {{name}} пътешествие?",
+    "viewSchedule": "Виж графика",
+    "bookTrial": "Запиши пробен урок",
     "jkd": {
       "name": "Джийт Кун До",
       "description": "Джийт Кун До (\"Пътят на прихващащия юмрук\") е бойно изкуство, създадено от Брус Лий. То е по-скоро философия за борба, отколкото фиксиран стил.",
@@ -104,5 +202,9 @@
   "footer": {
     "rights": "Всички права запазени",
     "followUs": "Последвай ни"
+  },
+  "validation": {
+    "titleRequired": "Заглавието е задължително",
+    "descriptionRequired": "Описанието е задължително"
   }
 }

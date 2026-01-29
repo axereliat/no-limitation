@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -9,14 +10,27 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send data to a backend
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setIsSubmitting(true);
+    setError('');
+
+    const { error: submitError } = await supabase
+      .from('contact_submissions')
+      .insert([formData]);
+
+    if (submitError) {
+      setError(t('contact.form.error'));
+      console.error('Submit error:', submitError);
+    } else {
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }
+    setIsSubmitting(false);
   };
 
   return (
@@ -133,6 +147,12 @@ export default function Contact() {
                 </div>
               )}
 
+              {error && (
+                <div className="bg-red-500/20 text-red-400 px-4 py-3 rounded-lg mb-6">
+                  {error}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-white mb-2">
@@ -181,9 +201,10 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full bg-accent text-primary py-4 rounded-lg font-bold hover:bg-accent-light transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-accent text-primary py-4 rounded-lg font-bold hover:bg-accent-light transition-colors disabled:opacity-50"
                 >
-                  {t('contact.form.send')}
+                  {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
                 </button>
               </form>
             </div>

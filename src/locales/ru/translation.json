@@ -12,7 +12,7 @@
   "hero": {
     "title": "NO LIMITATION",
     "subtitle": "Бойцовский клуб - Плевен",
-    "quote": "\"Using no way as a way, having No Limitation as limitation.\"",
+    "quote": "\"Использование принципа «нет пути» как пути, отсутствие ограничений как ограничения.\"",
     "quoteAuthor": "- Брюс Ли",
     "cta": "Пробное занятие"
   },
@@ -64,9 +64,92 @@
       "email": "Эл. почта",
       "message": "Сообщение",
       "send": "Отправить",
-      "success": "Сообщение успешно отправлено!"
+      "sending": "Отправка...",
+      "success": "Сообщение успешно отправлено!",
+      "error": "Ошибка отправки. Попробуйте снова."
     },
     "social": "Социальные сети"
+  },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выход",
+    "profile": "Профиль",
+    "email": "Эл. почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "fullName": "Полное имя",
+    "fullNamePlaceholder": "Иван Иванов",
+    "loggingIn": "Вход...",
+    "registering": "Регистрация...",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "invalidCredentials": "Неверный email или пароль",
+    "allFieldsRequired": "Все поля обязательны для заполнения.",
+    "viewMartialArts": "Обзор боевых искусств",
+    "passwordMismatch": "Пароли не совпадают",
+    "passwordTooShort": "Пароль должен быть не менее 6 символов",
+    "registrationSuccess": "Регистрация успешна!",
+    "checkEmail": "Проверьте почту для подтверждения.",
+    "goToLogin": "Перейти ко входу",
+    "profileUpdated": "Профиль успешно обновлён!",
+    "role": "Роль"
+  },
+  "admin": {
+    "dashboard": "Админ панель",
+    "classes": "Занятия",
+    "submissions": "Сообщения",
+    "instructors": "Инструкторы",
+    "newSubmissions": "Новые сообщения",
+    "totalClasses": "Всего занятий",
+    "totalInstructors": "Всего инструкторов",
+    "quickLinks": "Быстрые ссылки",
+    "viewSubmissions": "Просмотр сообщений",
+    "manageClasses": "Управление занятиями",
+    "manageInstructors": "Управление инструкторами",
+    "viewSite": "Просмотр сайта",
+    "addClass": "Добавить занятие",
+    "addInstructor": "Добавить инструктора",
+    "discipline": "Дисциплина",
+    "dayOfWeek": "День недели",
+    "time": "Время",
+    "ageGroup": "Возрастная группа",
+    "startTime": "Начало",
+    "endTime": "Конец",
+    "actions": "Действия",
+    "instructorName": "Имя инструктора",
+    "instructorTitle": "Звание",
+    "titlePlaceholder": "Старший инструктор",
+    "disciplines": "Дисциплины",
+    "displayOrder": "Порядок показа",
+    "bio": "Биография",
+    "confirmDelete": "Вы уверены, что хотите удалить?",
+    "noSubmissions": "Нет сообщений",
+    "markRead": "Отметить прочитанным",
+    "markReplied": "Отметить отвеченным",
+    "filter": {
+      "all": "Все",
+      "new": "Новые",
+      "read": "Прочитанные",
+      "replied": "Отвеченные"
+    },
+    "status": {
+      "new": "Новое",
+      "read": "Прочитано",
+      "replied": "Отвечено"
+    }
+  },
+  "common": {
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "add": "Добавить",
+    "clickToUpload": "Нажмите для загрузки",
+    "uploading": "Загрузка...",
+    "uploadError": "Ошибка загрузки",
+    "savedChanges": "Изменения сохранены."
   },
   "martialArts": {
     "jkd": {
@@ -104,5 +187,9 @@
   "footer": {
     "rights": "Все права защищены",
     "followUs": "Подписывайтесь"
+  },
+  "validation": {
+    "titleRequired": "Заголовок обязателен",
+    "descriptionRequired": "Описание обязательно"
   }
 }
