@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 
 interface ClassItem {
   id: number;
@@ -24,6 +26,9 @@ export default function Classes() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<number | null>(null);
 
   const [formData, setFormData] = useState({
     discipline: DISCIPLINES[0],
@@ -64,6 +69,9 @@ export default function Classes() {
       if (!error) {
         fetchClasses();
         resetForm();
+        toast.success(t('common.savedChanges'));
+      } else {
+        toast.error(error.message);
       }
     } else {
       const { error } = await supabase.from('classes').insert([formData]);
@@ -71,6 +79,9 @@ export default function Classes() {
       if (!error) {
         fetchClasses();
         resetForm();
+        toast.success(t('common.savedChanges'));
+      } else {
+        toast.error(error.message);
       }
     }
   };
@@ -87,14 +98,29 @@ export default function Classes() {
     setShowForm(true);
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm(t('admin.confirmDelete'))) return;
+  const handleDeleteClick = (id: number) => {
+    setItemToDelete(id);
+    setShowConfirm(true);
+  };
 
-    const { error } = await supabase.from('classes').delete().eq('id', id);
+  const handleConfirmDelete = async () => {
+    if (itemToDelete) {
+      const { error } = await supabase.from('classes').delete().eq('id', itemToDelete);
 
-    if (!error) {
-      setClasses((prev) => prev.filter((c) => c.id !== id));
+      if (!error) {
+        setClasses((prev) => prev.filter((c) => c.id !== itemToDelete));
+        toast.success(t('common.savedChanges'));
+      } else {
+        toast.error(error.message);
+      }
     }
+    setShowConfirm(false);
+    setItemToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirm(false);
+    setItemToDelete(null);
   };
 
   const resetForm = () => {
@@ -120,15 +146,19 @@ export default function Classes() {
   return (
     <div className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-white">
+        <div className="bg-gradient-to-r from-secondary to-secondary/50 rounded-xl p-8 mb-8 border-l-4 border-accent">
+          <h1 className="text-3xl font-bold text-white mb-2">
             {t('admin.classes')}
           </h1>
+          <p className="text-text-muted mb-6">
+            {classes.length} {t('admin.totalClasses').toLowerCase()}
+          </p>
           <Button
             onClick={() => setShowForm(!showForm)}
             variant="default"
+            size="lg"
           >
-            {showForm ? t('common.cancel') : t('admin.addClass')}
+            {showForm ? t('common.cancel') : '+ ' + t('admin.addClass')}
           </Button>
         </div>
 
@@ -286,7 +316,7 @@ export default function Classes() {
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => handleDeleteClick(item.id)}
                       className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                     >
                       {t('common.delete')}
@@ -298,6 +328,16 @@ export default function Classes() {
           </table>
         </div>
       </div>
+      <ConfirmModal
+        show={showConfirm}
+        title={t('common.delete')}
+        message={t('admin.confirmDelete')}
+        confirmText={t('common.delete')}
+        cancelText={t('common.cancel')}
+        confirmVariant="danger"
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </div>
   );
 }

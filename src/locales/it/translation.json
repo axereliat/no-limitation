@@ -109,6 +109,8 @@
     "manageInstructors": "Gestisci Istruttori",
     "viewSite": "Visualizza Sito",
     "addClass": "Aggiungi Lezione",
+    "noAdvantages": "Nessun vantaggio aggiunto",
+    "newAdvantagePlaceholder": "Aggiungi nuovo vantaggio...",
     "addInstructor": "Aggiungi Istruttore",
     "discipline": "Disciplina",
     "dayOfWeek": "Giorno della Settimana",
@@ -137,6 +139,22 @@
       "new": "Nuovo",
       "read": "Letto",
       "replied": "Risposto"
+    },
+    "manageUsers": "Gestione Utenti",
+    "users": {
+      "title": "Gestione Utenti",
+      "totalUsers": "Totale Utenti",
+      "addUser": "Aggiungi Utente",
+      "userCreated": "Utente creato con successo",
+      "fetchError": "Errore nel caricamento degli utenti",
+      "saveError": "Errore nel salvataggio dell'utente",
+      "cannotDeleteSelf": "Non puoi eliminare il tuo account",
+      "confirmDelete": "Sei sicuro di voler eliminare questo utente? Questa azione non può essere annullata.",
+      "createdAt": "Creato"
+    },
+    "role": {
+      "user": "Utente",
+      "admin": "Amministratore"
     }
   },
   "common": {

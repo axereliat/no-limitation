@@ -35,7 +35,6 @@ export default function Header() {
     const navLinks = [
         {path: '/', label: t('nav.home')},
         {path: '/about', label: t('nav.about')},
-        {path: '/schedule', label: t('nav.schedule')},
         {path: '/contact', label: t('nav.contact')},
     ];
 
@@ -208,13 +207,22 @@ export default function Header() {
                                             {t('auth.profile')}
                                         </Link>
                                         {isAdmin && (
-                                            <Link
-                                                to="/admin"
-                                                onClick={() => setIsUserMenuOpen(false)}
-                                                className="block px-4 py-2 text-sm text-white hover:bg-primary hover:text-accent transition-colors"
-                                            >
-                                                {t('admin.dashboard')}
-                                            </Link>
+                                            <>
+                                                <Link
+                                                    to="/admin"
+                                                    onClick={() => setIsUserMenuOpen(false)}
+                                                    className="block px-4 py-2 text-sm text-white hover:bg-primary hover:text-accent transition-colors"
+                                                >
+                                                    {t('admin.dashboard')}
+                                                </Link>
+                                                <Link
+                                                    to="/admin/users"
+                                                    onClick={() => setIsUserMenuOpen(false)}
+                                                    className="block px-4 py-2 text-sm text-white hover:bg-primary hover:text-accent transition-colors"
+                                                >
+                                                    {t('admin.manageUsers')}
+                                                </Link>
+                                            </>
                                         )}
                                         <button
                                             onClick={() => {
@@ -229,18 +237,12 @@ export default function Header() {
                                 )}
                             </div>
                         ) : (
-                            <div className="ml-4 flex gap-2">
+                            <div className="ml-4">
                                 <Link
                                     to="/login"
                                     className="px-4 py-1.5 border border-white/30 text-white text-sm font-medium rounded-md hover:border-accent hover:text-accent transition-colors"
                                 >
                                     {t('auth.login')}
-                                </Link>
-                                <Link
-                                    to="/register"
-                                    className="px-4 py-1.5 border border-accent text-accent text-sm font-medium rounded-md hover:bg-accent hover:text-primary transition-colors"
-                                >
-                                    {t('auth.register')}
                                 </Link>
                             </div>
                         )}
@@ -328,13 +330,22 @@ export default function Header() {
                                         {t('auth.profile')}
                                     </Link>
                                     {isAdmin && (
-                                        <Link
-                                            to="/admin"
-                                            onClick={() => setIsMenuOpen(false)}
-                                            className="block py-2 text-sm text-white hover:text-accent"
-                                        >
-                                            {t('admin.dashboard')}
-                                        </Link>
+                                        <>
+                                            <Link
+                                                to="/admin"
+                                                onClick={() => setIsMenuOpen(false)}
+                                                className="block py-2 text-sm text-white hover:text-accent"
+                                            >
+                                                {t('admin.dashboard')}
+                                            </Link>
+                                            <Link
+                                                to="/admin/users"
+                                                onClick={() => setIsMenuOpen(false)}
+                                                className="block py-2 text-sm text-white hover:text-accent"
+                                            >
+                                                {t('admin.manageUsers')}
+                                            </Link>
+                                        </>
                                     )}
                                     <button
                                         onClick={() => {
@@ -347,20 +358,13 @@ export default function Header() {
                                     </button>
                                 </div>
                             ) : (
-                                <div className="flex gap-2">
+                                <div>
                                     <Link
                                         to="/login"
                                         onClick={() => setIsMenuOpen(false)}
                                         className="px-4 py-1.5 border border-white/30 text-white text-sm font-medium rounded-md hover:border-accent hover:text-accent transition-colors"
                                     >
                                         {t('auth.login')}
-                                    </Link>
-                                    <Link
-                                        to="/register"
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="px-4 py-1.5 border border-accent text-accent text-sm font-medium rounded-md hover:bg-accent hover:text-primary transition-colors"
-                                    >
-                                        {t('auth.register')}
                                     </Link>
                                 </div>
                             )}

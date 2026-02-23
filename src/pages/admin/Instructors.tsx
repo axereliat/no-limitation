@@ -166,15 +166,19 @@ export default function Instructors() {
         <>
             <div className="py-20 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-3xl font-bold text-white">
+                    <div className="bg-gradient-to-r from-secondary to-secondary/50 rounded-xl p-8 mb-8 border-l-4 border-accent">
+                        <h1 className="text-3xl font-bold text-white mb-2">
                             {t('admin.instructors')}
                         </h1>
+                        <p className="text-text-muted mb-6">
+                            {instructors.length} {t('admin.totalInstructors').toLowerCase()}
+                        </p>
                         <Button
                             onClick={() => setShowForm(!showForm)}
-                            className="bg-accent text-primary hover:bg-accent/90"
+                            variant="default"
+                            size="lg"
                         >
-                            {showForm ? t('common.cancel') : t('admin.addInstructor')}
+                            {showForm ? t('common.cancel') : '+ ' + t('admin.addInstructor')}
                         </Button>
                     </div>
 

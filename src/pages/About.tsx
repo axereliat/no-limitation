@@ -1,183 +1,191 @@
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '@/lib/supabase';
+
+interface Instructor {
+  id: number;
+  name: string;
+  title: string;
+  bio: string;
+  photo_url: string | null;
+  disciplines: string[];
+}
 
 export default function About() {
   const { t } = useTranslation();
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
+
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      const { data } = await supabase
+        .from('instructors')
+        .select('*')
+        .order('display_order');
+
+      if (data) setInstructors(data);
+    };
+    fetchInstructors();
+  }, []);
 
   return (
     <div>
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="py-20 px-4 bg-secondary">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-accent mb-6">
             {t('about.title')}
           </h1>
           <p className="text-text-muted text-lg">
-            "No Limitation" - {t('about.philosophyText').split('.')[0]}.
+            "Using no way as a way, having No Limitation as limitation."
           </p>
+          <p className="text-accent mt-2">- Bruce Lee</p>
         </div>
       </section>
 
-      {/* History */}
-      <section className="py-20 px-4">
+      {/* History Section */}
+      <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">{t('about.history')}</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-text-muted leading-relaxed mb-6">
-                {t('about.historyText')}
-              </p>
-              <blockquote className="border-l-4 border-accent pl-4 italic text-white">
-                "Using no way as a way, having no limitation as limitation."
-                <span className="block text-accent mt-2">- Bruce Lee</span>
-              </blockquote>
-            </div>
-            <div className="bg-secondary rounded-xl p-8 flex items-center justify-center min-h-[300px]">
-              <div className="text-center text-text-muted">
-                <svg className="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p>Club Photo</p>
-              </div>
-            </div>
+          <h2 className="text-3xl font-bold text-accent mb-6 text-center">
+            {t('about.history')}
+          </h2>
+          <div className="bg-secondary rounded-xl p-8 border-l-4 border-accent">
+            <p className="text-text-muted leading-relaxed text-lg">
+              {t('about.historyText')}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Philosophy */}
-      <section className="py-20 px-4 bg-secondary">
+      {/* Philosophy Section */}
+      <section className="py-16 px-4 bg-secondary/50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">{t('about.philosophy')}</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-primary p-6 rounded-xl">
-              <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">💧</span>
+          <h2 className="text-3xl font-bold text-accent mb-6 text-center">
+            {t('about.philosophy')}
+          </h2>
+          <div className="bg-primary rounded-xl p-8">
+            <p className="text-text-muted leading-relaxed text-lg">
+              {t('about.philosophyText')}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Instructors Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-accent mb-10 text-center">
+            {t('about.instructors')}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {instructors.map((instructor) => (
+              <div
+                key={instructor.id}
+                className="bg-secondary rounded-xl p-6 text-center hover:border-accent border border-transparent transition-colors"
+              >
+                {instructor.photo_url ? (
+                  <img
+                    src={instructor.photo_url}
+                    alt={instructor.name}
+                    className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-accent"
+                  />
+                ) : (
+                  <div className="w-32 h-32 rounded-full mx-auto mb-4 bg-primary flex items-center justify-center border-4 border-accent">
+                    <span className="text-4xl text-accent">
+                      {instructor.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-white mb-1">
+                  {instructor.name}
+                </h3>
+                {instructor.title && (
+                  <p className="text-accent text-sm mb-2">{instructor.title}</p>
+                )}
+                {instructor.disciplines?.length > 0 && (
+                  <p className="text-text-muted text-sm mb-3">
+                    {instructor.disciplines.join(' • ')}
+                  </p>
+                )}
+                {instructor.bio && (
+                  <p className="text-text-muted text-sm">{instructor.bio}</p>
+                )}
               </div>
-              <h3 className="text-white font-semibold mb-2">Be Like Water</h3>
-              <p className="text-text-muted text-sm">
-                Adapt to any situation. Be flexible in technique and mindset.
-              </p>
-            </div>
-            <div className="bg-primary p-6 rounded-xl">
-              <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">🎯</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* JKD Lineage Section */}
+      <section className="py-16 px-4 bg-secondary/50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-accent mb-6 text-center">
+            {t('about.lineage')}
+          </h2>
+          <div className="bg-primary rounded-xl p-8">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-white">Bruce Lee</p>
+                <p className="text-text-muted">Founder of Jeet Kune Do</p>
               </div>
-              <h3 className="text-white font-semibold mb-2">Use What Works</h3>
-              <p className="text-text-muted text-sm">
-                No style is superior. Take effective techniques from all systems.
-              </p>
-            </div>
-            <div className="bg-primary p-6 rounded-xl">
-              <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">♾️</span>
+              <div className="text-accent text-2xl">↓</div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-white">Dan Inosanto</p>
+                <p className="text-text-muted">Senior Student of Bruce Lee</p>
               </div>
-              <h3 className="text-white font-semibold mb-2">No Limitation</h3>
-              <p className="text-text-muted text-sm">
-                Break through physical and mental barriers. Constant evolution.
-              </p>
+              <div className="text-accent text-2xl">↓</div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-white">Rick Faye</p>
+                <p className="text-text-muted">Full Instructor under Dan Inosanto</p>
+              </div>
+              <div className="text-accent text-2xl">↓</div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-white">Genko Simeonov & Pantaley Gergov</p>
+                <p className="text-text-muted">Senior Instructors - No Limitation Fight Club</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Instructors */}
-      <section className="py-20 px-4">
+      {/* Facilities Section */}
+      <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">{t('about.instructors')}</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-secondary rounded-xl overflow-hidden">
-              <div className="h-48 bg-primary flex items-center justify-center">
-                <svg className="w-24 h-24 text-text-muted opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold text-xl mb-1">Genko Simeonov</h3>
-                <p className="text-accent text-sm mb-3">Senior Instructor, Jeet Kune Do</p>
-                <p className="text-text-muted text-sm">
-                  Co-founder of NL Fight Club. Senior Instructor in Jeet Kune Do under the lineage of Bruce Lee, GM Richard Bustillo, and GM Lyubomir Yordanov.
-                </p>
-              </div>
+          <h2 className="text-3xl font-bold text-accent mb-6 text-center">
+            {t('about.facilities')}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-secondary rounded-xl p-6 border-l-4 border-accent">
+              <h3 className="text-xl font-bold text-white mb-3">Training Area</h3>
+              <ul className="text-text-muted space-y-2">
+                <li>• Professional MMA mats</li>
+                <li>• Full-size boxing ring</li>
+                <li>• Heavy bags & speed bags</li>
+                <li>• Grappling dummies</li>
+              </ul>
             </div>
-
-            <div className="bg-secondary rounded-xl overflow-hidden">
-              <div className="h-48 bg-primary flex items-center justify-center">
-                <svg className="w-24 h-24 text-text-muted opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold text-xl mb-1">Pantaley Gergov</h3>
-                <p className="text-accent text-sm mb-3">Senior Instructor, Jeet Kune Do</p>
-                <p className="text-text-muted text-sm">
-                  Co-founder of NL Fight Club. Senior Instructor in Jeet Kune Do under the lineage of Bruce Lee, GM Richard Bustillo, and GM Lyubomir Yordanov.
-                </p>
-              </div>
+            <div className="bg-secondary rounded-xl p-6 border-l-4 border-accent">
+              <h3 className="text-xl font-bold text-white mb-3">Equipment</h3>
+              <ul className="text-text-muted space-y-2">
+                <li>• Focus mitts & Thai pads</li>
+                <li>• Kickboxing shields</li>
+                <li>• Eskrima sticks & training knives</li>
+                <li>• Protective gear available</li>
+              </ul>
             </div>
-          </div>
-
-          {/* JKD Lineage */}
-          <div className="mt-12">
-            <h3 className="text-2xl font-bold text-white mb-6">{t('about.lineage')}</h3>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-center">
-              <div className="bg-primary px-6 py-4 rounded-lg">
-                <p className="text-white font-semibold">Bruce Lee</p>
-                <p className="text-text-muted text-sm">Founder</p>
-              </div>
-              <span className="text-accent text-2xl">&rarr;</span>
-              <div className="bg-primary px-6 py-4 rounded-lg">
-                <p className="text-white font-semibold">GM Richard Bustillo</p>
-                <p className="text-text-muted text-sm">IMB Academy</p>
-              </div>
-              <span className="text-accent text-2xl">&rarr;</span>
-              <div className="bg-primary px-6 py-4 rounded-lg">
-                <p className="text-white font-semibold">GM Lyubomir Yordanov</p>
-                <p className="text-text-muted text-sm">IMASTI</p>
-              </div>
-              <span className="text-accent text-2xl">&rarr;</span>
-              <div className="bg-accent px-6 py-4 rounded-lg">
-                <p className="text-primary-foreground font-semibold">Genko Simeonov & Pantaley Gergov</p>
-                <p className="text-primary-foreground/80 text-sm">NL Fight Club</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Partnership */}
-          <div className="mt-12 bg-secondary rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">{t('about.partnership')}</h3>
-            <p className="text-text-muted">{t('about.partnershipText')}</p>
           </div>
         </div>
       </section>
 
-      {/* Facilities */}
-      <section className="py-20 px-4 bg-secondary">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">{t('about.facilities')}</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-4">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🥋</span>
-              </div>
-              <p className="text-white">Professional Mats</p>
-            </div>
-            <div className="text-center p-4">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🥊</span>
-              </div>
-              <p className="text-white">Heavy Bags</p>
-            </div>
-            <div className="text-center p-4">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🏋️</span>
-              </div>
-              <p className="text-white">Weight Area</p>
-            </div>
-            <div className="text-center p-4">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🚿</span>
-              </div>
-              <p className="text-white">Showers & Lockers</p>
-            </div>
+      {/* Partnerships Section */}
+      <section className="py-16 px-4 bg-secondary/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-accent mb-6">
+            {t('about.partnership')}
+          </h2>
+          <div className="bg-primary rounded-xl p-8">
+            <p className="text-text-muted text-lg">
+              {t('about.partnershipText')}
+            </p>
           </div>
         </div>
       </section>

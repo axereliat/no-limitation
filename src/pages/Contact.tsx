@@ -1,49 +1,16 @@
-import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    const { error: submitError } = await supabase
-      .from('contact_submissions')
-      .insert([formData]);
-
-    if (submitError) {
-      setError(t('contact.form.error'));
-      console.error('Submit error:', submitError);
-    } else {
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }
-    setIsSubmitting(false);
-  };
 
   return (
     <div>
       {/* Hero */}
       <section className="py-20 px-4 bg-secondary">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-accent mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-accent">
             {t('contact.title')}
           </h1>
-          <p className="text-text-muted text-lg">
-            Ready to start your journey? Get in touch with us!
-          </p>
         </div>
       </section>
 
@@ -65,32 +32,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">{t('contact.address')}</h3>
-                    <p className="text-text-muted">[Address will be added here]</p>
                     <p className="text-text-muted">Sofia, Bulgaria</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">{t('contact.phone')}</h3>
-                    <p className="text-text-muted">[Phone number]</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">{t('contact.email')}</h3>
-                    <p className="text-text-muted">[email@example.com]</p>
                   </div>
                 </div>
 
@@ -114,7 +56,7 @@ export default function Contact() {
                 <h3 className="text-white font-semibold mb-4">{t('contact.social')}</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://facebook.com"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-text-muted hover:text-accent hover:bg-accent/20 transition-colors"
@@ -124,7 +66,7 @@ export default function Contact() {
                     </svg>
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-text-muted hover:text-accent hover:bg-accent/20 transition-colors"
@@ -136,89 +78,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-8">Send us a message</h2>
-
-              {isSubmitted && (
-                <div className="bg-green-500/20 text-green-400 px-4 py-3 rounded-lg mb-6">
-                  {t('contact.form.success')}
-                </div>
-              )}
-
-              {error && (
-                <div className="bg-red-500/20 text-red-400 px-4 py-3 rounded-lg mb-6">
-                  {error}
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-white mb-2">
-                    {t('contact.form.name')}
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 bg-secondary rounded-lg text-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-white mb-2">
-                    {t('contact.form.email')}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 bg-secondary rounded-lg text-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent"
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-white mb-2">
-                    {t('contact.form.message')}
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 bg-secondary rounded-lg text-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"
-                    placeholder="Your message..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-accent text-primary py-4 rounded-lg font-bold hover:bg-accent-light transition-colors disabled:opacity-50"
-                >
-                  {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
-                </button>
-              </form>
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Map Placeholder */}
-      <section className="h-96 bg-secondary flex items-center justify-center">
-        <div className="text-center text-text-muted">
-          <svg className="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-          </svg>
-          <p>[Google Maps embed will be added here]</p>
         </div>
       </section>
     </div>

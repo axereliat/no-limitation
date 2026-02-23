@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAuth} from '@/contexts/AuthContext';
 import {Button} from '@/components/ui/button';
@@ -87,13 +87,6 @@ export default function Login() {
                             {loading ? t('auth.loggingIn') : t('auth.login')}
                         </Button>
                     </form>
-
-                    <p className="mt-6 text-center text-text-muted">
-                        {t('auth.noAccount')}{' '}
-                        <Link to="/register" className="text-accent hover:underline">
-                            {t('auth.register')}
-                        </Link>
-                    </p>
                 </div>
             </div>
         </div>
