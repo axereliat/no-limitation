@@ -48,6 +48,8 @@ export default function Dashboard() {
     }>({});
 
     const [newAdvantage, setNewAdvantage] = useState('');
+    const [uploading, setUploading] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const handleDeleteClick = (id: number) => {
         setItemToDelete(id);
@@ -137,6 +139,45 @@ export default function Dashboard() {
         }
     };
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
+    const uploadImage = async (): Promise<string | null> => {
+        if (!selectedFile) return null;
+
+        setUploading(true);
+        try {
+            const fileExt = selectedFile.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('martial-arts-images')
+                .upload(filePath, selectedFile);
+
+            if (uploadError) {
+                console.error('Upload error:', uploadError);
+                toast.error('Failed to upload image');
+                return null;
+            }
+
+            const { data } = supabase.storage
+                .from('martial-arts-images')
+                .getPublicUrl(filePath);
+
+            return data.publicUrl;
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            toast.error('Failed to upload image');
+            return null;
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const validateForm = () => {
         const newErrors: { title?: string; description?: string } = {};
 
@@ -159,11 +200,20 @@ export default function Dashboard() {
             return;
         }
 
+        // Upload image if a new file is selected
+        let photoUrl = formData.photo_url;
+        if (selectedFile) {
+            const uploadedUrl = await uploadImage();
+            if (uploadedUrl) {
+                photoUrl = uploadedUrl;
+            }
+        }
+
         const payload = {
             title: formData.title,
             sub_title: formData.sub_title || null,
             description: formData.description || null,
-            photo_url: formData.photo_url || null,
+            photo_url: photoUrl || null,
         };
 
         let martialArtId = editingId;
@@ -262,6 +312,7 @@ export default function Dashboard() {
         setSelectedTraining([]);
         setErrors({});
         setShowForm(false);
+        setSelectedFile(null);
     };
 
     const toggleAdvantage = (id: number) => {
@@ -328,7 +379,13 @@ export default function Dashboard() {
                         {martialArts.length} {t('admin.totalMartialArts') || 'martial arts'}
                     </p>
                     <Button
-                        onClick={() => setShowForm(!showForm)}
+                        onClick={() => {
+                            if (showForm) {
+                                resetForm();
+                            } else {
+                                setShowForm(true);
+                            }
+                        }}
                         variant="default"
                         size="lg"
                     >
@@ -373,6 +430,30 @@ export default function Dashboard() {
                             </div>
 
                             <div className="md:col-span-2">
+                                <Label className="text-white">Image</Label>
+                                <div className="mt-1">
+                                    <Input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                        className="bg-[#1a1a1a] border-gray-700 text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-primary hover:file:bg-accent/80"
+                                    />
+                                    {selectedFile && (
+                                        <p className="text-sm text-accent mt-2">Selected: {selectedFile.name}</p>
+                                    )}
+                                    {formData.photo_url && !selectedFile && (
+                                        <div className="mt-2">
+                                            <img
+                                                src={formData.photo_url}
+                                                alt="Current"
+                                                className="w-32 h-32 object-cover rounded-lg border border-gray-700"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="md:col-span-2">
                                 <Label className="text-white">{t('admin.description')} *</Label>
                                 <Textarea
                                     value={formData.description}
@@ -391,65 +472,6 @@ export default function Dashboard() {
                                 {errors.description && (
                                     <p className="text-red-500 text-sm mt-1">{errors.description}</p>
                                 )}
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <Label className="text-white mb-3 block">{t('martialArts.benefits')}</Label>
-                                <div className="bg-[#1a1a1a] rounded-lg p-4 max-h-48 overflow-y-auto">
-                                    {advantages.length === 0 ? (
-                                        <p className="text-gray-500 text-sm">{t('admin.noAdvantages')}</p>
-                                    ) : (
-                                        <div className="space-y-2">
-                                            {advantages.map((adv) => (
-                                                <div
-                                                    key={adv.id}
-                                                    className="flex items-center gap-3 bg-secondary/50 border border-gray-700 hover:border-accent/50 p-3 rounded-lg group transition-colors"
-                                                >
-                                                    <label className="flex items-center gap-3 cursor-pointer flex-1">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={selectedAdvantages.includes(adv.id)}
-                                                            onChange={() => toggleAdvantage(adv.id)}
-                                                            className="w-4 h-4 accent-accent"
-                                                        />
-                                                        <span className="text-white text-sm">{adv.title}</span>
-                                                    </label>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => handleDeleteAdvantage(adv.id)}
-                                                        className="text-red-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity px-2"
-                                                        title={t('common.delete')}
-                                                    >
-                                                        −
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="flex gap-2 mt-2">
-                                    <Input
-                                        value={newAdvantage}
-                                        onChange={(e) => setNewAdvantage(e.target.value)}
-                                        placeholder={t('admin.newAdvantagePlaceholder')}
-                                        className="flex-1 bg-[#1a1a1a] border-gray-700 text-white text-sm"
-                                        onKeyDown={(e) => {
-                                            if (e.key === 'Enter') {
-                                                e.preventDefault();
-                                                handleAddAdvantage();
-                                            }
-                                        }}
-                                    />
-                                    <Button
-                                        type="button"
-                                        onClick={handleAddAdvantage}
-                                        variant="outline"
-                                        size="icon"
-                                        className="border-gray-600 text-white h-9 w-9 shrink-0"
-                                    >
-                                        +
-                                    </Button>
-                                </div>
                             </div>
 
                             <div className="md:col-span-2 mt-6">
